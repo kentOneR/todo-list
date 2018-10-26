@@ -32,11 +32,18 @@ class App extends Component {
     this.props.onRemoveTodo(id);
   }
 
+  toggleTodoStatus = (id) => {
+    this.props.onToggleTodo(id);
+  }
+
   render() {
     return (
       <div className="App">
         <FormContainer actions={ACTIONS} objects={OBJECTS} />
-        <TodosList todos={this.props.todos} deleted={this.removeTodo}/>
+        <TodosList 
+          todos={this.props.todos}
+          toggle={this.toggleTodoStatus}
+          deleted={this.removeTodo}/>
       </div>
     );
   }
@@ -50,7 +57,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onRemoveTodo: (id) => dispatch({type: 'REMOVE_TODO', id: id})
+    onRemoveTodo: (id) => dispatch({type: 'REMOVE_TODO', id: id}),
+    onToggleTodo: (id) => dispatch({type: 'TOGGLE_TODO', id: id}),
   }
 }
 

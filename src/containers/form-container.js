@@ -7,7 +7,8 @@ class FormContainer extends Component {
   state = {
     id: 0,
     action: 'eat',
-    object: 'the banana'
+    object: 'the banana',
+    done: false
   }
 
   onActionChangedHangler = (e) => {
