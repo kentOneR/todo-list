@@ -4,6 +4,7 @@ import './App.css';
 
 import FormContainer from './containers/form-container';
 import TodosList from './containers/todos-list';
+import Popin from './containers/popin';
 
 const ACTIONS = [
   'eat',
@@ -28,22 +29,36 @@ const OBJECTS = [
 
 class App extends Component {
 
-  removeTodo = (id) => {
-    this.props.onRemoveTodo(id);
+  state = {
+    showPopin: false,
+    indexToShow: null
   }
 
-  toggleTodoStatus = (id) => {
-    this.props.onToggleTodo(id);
+  updateTodo = (id) => {
+    const index = this.props.todos.findIndex(todo => todo.id === id);
+    this.setState({showPopin: true, indexToShow: index});
+  }
+
+  closedPopin = () => {
+    this.setState({showPopin: false, indexToShow: null})
   }
 
   render() {
     return (
       <div className="App">
-        <FormContainer actions={ACTIONS} objects={OBJECTS} />
+        <FormContainer actions={ACTIONS} objects={OBJECTS} submit='Add new todo'/>
         <TodosList 
           todos={this.props.todos}
-          toggle={this.toggleTodoStatus}
-          deleted={this.removeTodo}/>
+          toggle={this.props.onToggleTodo}
+          updated={this.updateTodo}
+          deleted={this.props.onRemoveTodo}/>
+        {this.state.showPopin ? 
+          <Popin
+            actions={ACTIONS} objects={OBJECTS}
+            todo={this.props.todos[this.state.indexToShow]}
+            closed={this.closedPopin}
+          /> : null
+        }
       </div>
     );
   }

@@ -31,7 +31,7 @@ class FormContainer extends Component {
       <form>
         <SelectForm label='action' options={this.props.actions} changed={this.onActionChangedHangler}/>
         <SelectForm label='object' options={this.props.objects} changed={this.onObjectChangedHangler} />
-        <input type='submit' value='Add new todo' onClick={this.onSubmitValues} />
+        <input type='submit' value={this.props.submit} onClick={this.onSubmitValues} />
       </form>
     );
   };
