@@ -16,16 +16,25 @@ const reducer = (state = initialState, action) => {
         todos: updatedTodos
       }
     case 'TOGGLE_TODO':
-    const allTodos = [...state.todos],
-          index = allTodos.findIndex(todo => todo.id === action.id),
-          thisTodo = allTodos[index];
+    const allToggleTodos = [...state.todos],
+          toggleIndex = allToggleTodos.findIndex(todo => todo.id === action.id),
+          thisToggleTodo = allToggleTodos[toggleIndex];
 
-    thisTodo.done = !thisTodo.done;
-    allTodos[index] = thisTodo;
-
+    thisToggleTodo.done = !thisToggleTodo.done;
+    allToggleTodos[toggleIndex] = thisToggleTodo;
       return {
         ...state,
-        todos: allTodos
+        todos: allToggleTodos
+      }
+    case 'UPDATE_TODO':
+    const allUpdateTodos = [...state.todos],
+          updateIndex = allUpdateTodos.findIndex(todo => todo.id === action.todo.id),
+          thisUpdateTodo = action.todo;
+
+    allUpdateTodos[updateIndex] = thisUpdateTodo;
+      return {
+        ...state,
+        todos: allUpdateTodos
       }
     default:
       return state;
