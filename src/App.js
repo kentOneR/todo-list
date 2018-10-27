@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import styled from 'styled-components';
 import './App.css';
 
 import FormContainer from './containers/form-container';
@@ -26,6 +27,11 @@ const OBJECTS = [
   'the coffin',
 ];
 
+const StyledContainer = styled.div`
+  width: 80%;
+  max-width: 600px;
+  margin: 0 auto;
+`;
 
 class App extends Component {
 
@@ -46,19 +52,22 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <FormContainer actions={ACTIONS} objects={OBJECTS} submit='Add new todo'/>
-        <TodosList 
-          todos={this.props.todos}
-          toggle={this.props.onToggleTodo}
-          updated={this.updateTodo}
-          deleted={this.props.onRemoveTodo}/>
-        {this.state.showPopin ? 
-          <Popin
-            actions={ACTIONS} objects={OBJECTS}
-            todo={this.props.todos[this.state.indexToShow]}
-            closed={this.closedPopin}
-          /> : null
-        }
+        <h1>My Todo List</h1>
+        <StyledContainer>
+          <FormContainer actions={ACTIONS} objects={OBJECTS} submit='Add new todo'/>
+          <TodosList 
+            todos={this.props.todos}
+            toggle={this.props.onToggleTodo}
+            updated={this.updateTodo}
+            deleted={this.props.onRemoveTodo}/>
+          {this.state.showPopin ? 
+            <Popin
+              actions={ACTIONS} objects={OBJECTS}
+              todo={this.props.todos[this.state.indexToShow]}
+              closed={this.closedPopin}
+            /> : null
+          }
+        </StyledContainer>
       </div>
     );
   }

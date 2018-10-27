@@ -12,3 +12,32 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+label,
+select,
+input:not([type='checkbox']) {
+  width: 100%;
+}
+
+select,
+input {
+  margin-bottom: 10px;
+}
+
+ul {
+  padding-left: 0;
+}
+
+li {
+  position: relative;
+  list-style-type: none;
+  text-align: left;
+}
+
+.closed-popin {
+  position: absolute;
+  top: 0;
+  right: 0;
+  color: #FF0000;
+}
+
