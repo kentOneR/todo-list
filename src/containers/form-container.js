@@ -26,12 +26,27 @@ class FormContainer extends Component {
     this.props.submitValues(this.state);
   };
 
+  onRandomValues = (e) => {
+    e.preventDefault();
+    const id = new Date().getTime(),
+          action = this.props.actions[Math.floor(Math.random()*this.props.actions.length)],
+          object = this.props.objects[Math.floor(Math.random()*this.props.objects.length)];
+
+    this.setState({
+      id: id,
+      action: action,
+      object: object
+    });
+    this.props.submitValues(this.state);
+  };
+
   render() {
     return (
       <form>
         <SelectForm label='action' options={this.props.actions} changed={this.onActionChangedHangler}/>
         <SelectForm label='object' options={this.props.objects} changed={this.onObjectChangedHangler} />
         <input type='submit' value={this.props.submit} onClick={this.onSubmitValues} />
+        <input type='submit' value='Random Todo' onClick={this.onRandomValues} />
       </form>
     );
   };
